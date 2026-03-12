@@ -11,8 +11,8 @@
         <title>404 Not Found - Duck Site</title>
         <meta name="theme-color" content="#1E6654" />
 
+        <!-- Used to preload theme before browser renders page -->
         <script>
-            // This runs immediately, blocking the initial render to prevent the white flash
             (function () {
                 try {
                     var theme = localStorage.getItem("theme");
@@ -23,12 +23,11 @@
             })();
         </script>
         <style>
-            /* Critical CSS: Sets the background immediately before Vite loads style.css */
             body {
-                background-color: #f0f2f5; /* Light mode background */
+                background-color: #f0f2f5;
             }
             html[data-theme="dark"] body {
-                background-color: #1a202c; /* Dark mode background */
+                background-color: #1a202c;
             }
         </style>
     </head>
