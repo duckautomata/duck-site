@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Duck Site</title>
+        <meta name="title" content="Duck Site" />
+        <meta name="description" content="A central hub for all Dragoon websites made by Duck Automata." />
+        <meta name="theme-color" content="#1E6654" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.duck-automata.com/" />
+        <meta property="og:title" content="Duck Site" />
+        <meta property="og:description" content="A central hub for all Dragoon websites made by Duck Automata." />
+        <meta property="og:image" content="https://www.duck-automata.com/site_preview.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content="@duckautomata" />
+        <meta name="twitter:url" content="https://www.duck-automata.com/" />
+        <meta name="twitter:title" content="Duck Site" />
+        <meta name="twitter:description" content="A central hub for all Dragoon websites made by Duck Automata." />
+        <meta name="twitter:image" content="https://www.duck-automata.com/site_preview.png" />
+
+        <!-- Used to preload theme before browser renders page -->
+        <script>
+            (function () {
+                try {
+                    var theme = localStorage.getItem("theme");
+                    if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                        document.documentElement.setAttribute("data-theme", "dark");
+                    }
+                } catch (e) {}
+            })();
+        </script>
+        <style>
+            body {
+                background-color: #f0f2f5;
+            }
+            html[data-theme="dark"] body {
+                background-color: #1a202c;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="theme-toggle" title="Toggle theme">
+                <input type="checkbox" id="theme-toggle" />
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <h1>Duck Automata Websites</h1>
+        <p class="hub-description">A central hub for all the websites I made for my fellow Dragoons.</p>
+
+        <main id="site-grid"></main>
+
+        <div id="lightbox-modal" class="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-content" id="lightbox-img" />
+        </div>
+
+        <script type="module" src="/src/main.js"></script>
+    </body>
+</html>

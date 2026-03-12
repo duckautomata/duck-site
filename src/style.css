@@ -1,0 +1,347 @@
+/* ==========================================================================
+   1. CSS Variables (Theme Colors & Images)
+   ========================================================================== */
+:root {
+    /* Light Theme (Default) */
+    --bg-color: #f0f2f5;
+    --card-bg-color: #ffffff;
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-tertiary: #718096;
+    --border-color: #edf2f7;
+    --accent-color: #4299e1;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --shadow-hover-color: rgba(0, 0, 0, 0.12);
+    --lightbox-bg: rgba(0, 0, 0, 0.9);
+    --lightbox-close: #f1f1f1;
+    --toggle-bg: #cbd5e0;
+    --toggle-fg: #ffffff;
+    --toggle-icon: #f6e05e; /* Sun */
+}
+
+[data-theme="dark"] {
+    /* Dark Theme */
+    --bg-color: #1a202c;
+    --card-bg-color: #2d3748;
+    --text-primary: #edf2f7;
+    --text-secondary: #a0aec0;
+    --text-tertiary: #718096;
+    --border-color: #4a5568;
+    --accent-color: #4299e1;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --shadow-hover-color: rgba(0, 0, 0, 0.3);
+    --toggle-bg: #4a5568;
+    --toggle-fg: #1a202c;
+    --toggle-icon: #76e4f7; /* Moon */
+}
+
+/* ==========================================================================
+   2. Basic Page Styles
+   ========================================================================== */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 20px;
+    color: var(--text-secondary);
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+h1 {
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+/* ==========================================================================
+   3. Homepage Specific Styles
+   ========================================================================== */
+.hub-description {
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    margin-top: 0;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Theme Toggle Switch */
+.theme-switch-wrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--toggle-bg);
+    transition: 0.3s;
+    border-radius: 28px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--toggle-fg);
+    transition: 0.3s;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--toggle-icon);
+}
+
+input:not(:checked) + .slider:before {
+    content: "☀️";
+}
+
+input:checked + .slider:before {
+    content: "🌙";
+}
+
+input:checked + .slider {
+    background-color: var(--toggle-bg);
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+    color: var(--toggle-icon);
+}
+
+/* Site Grid Layout */
+#site-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Site Card Styles */
+.site-card {
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    overflow: hidden;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px var(--shadow-hover-color);
+}
+
+.site-card .display-image-link {
+    display: block;
+    height: 200px;
+    background-color: var(--border-color);
+    background-image: var(--light-image);
+    background-size: cover;
+    background-position: center;
+}
+
+.card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+}
+
+.card-content h3 a {
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: color 0.2s ease;
+}
+
+.card-content h3 a:hover {
+    color: var(--accent-color);
+}
+
+.card-content .description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    flex-grow: 1;
+    margin-bottom: 16px;
+}
+
+.card-content .examples-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.example-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.example-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    border: 2px solid var(--border-color);
+    cursor: pointer;
+    transition:
+        opacity 0.2s ease,
+        border-color 0.3s ease;
+    background-image: var(--light-image);
+    background-size: cover;
+    background-position: center;
+}
+
+.example-thumb:hover {
+    opacity: 0.8;
+}
+
+[data-theme="dark"] .display-image-link,
+[data-theme="dark"] .example-thumb {
+    background-image: var(--dark-image);
+}
+
+/* Lightbox Modal Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding: 20px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--lightbox-bg);
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: var(--lightbox-close);
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   4. 404 Page Specific Styles
+   ========================================================================== */
+
+/* Add class="error-page" to your 404.html body tag to center this properly */
+body.error-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.error-container {
+    text-align: center;
+    background-color: var(--card-bg-color);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    max-width: 500px;
+    width: 100%;
+}
+
+.error-code {
+    font-size: 6rem;
+    margin: 0;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--accent-color);
+}
+
+.error-container h2 {
+    font-size: 2rem;
+    margin: 10px 0;
+    color: var(--text-primary);
+}
+
+.error-container p {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--accent-color);
+    border-radius: 8px;
+    text-decoration: none;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.button:hover {
+    background-color: #3182ce;
+    transform: translateY(-2px);
+}

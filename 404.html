@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>404 Not Found - Duck Site</title>
+        <meta name="theme-color" content="#1E6654" />
+
+        <script>
+            // This runs immediately, blocking the initial render to prevent the white flash
+            (function () {
+                try {
+                    var theme = localStorage.getItem("theme");
+                    if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                        document.documentElement.setAttribute("data-theme", "dark");
+                    }
+                } catch (e) {}
+            })();
+        </script>
+        <style>
+            /* Critical CSS: Sets the background immediately before Vite loads style.css */
+            body {
+                background-color: #f0f2f5; /* Light mode background */
+            }
+            html[data-theme="dark"] body {
+                background-color: #1a202c; /* Dark mode background */
+            }
+        </style>
+    </head>
+
+    <body class="error-page">
+        <div class="error-container">
+            <h1 class="error-code">404</h1>
+            <h2>Page Not Found</h2>
+            <p>
+                The page you're looking for might have been removed, had its name changed, or is temporarily
+                unavailable.
+            </p>
+            <a href="/" class="button">Return to Hub</a>
+        </div>
+        <script type="module" src="/src/404.js"></script>
+    </body>
+</html>
