@@ -26,9 +26,9 @@ export function renderGrid() {
 
         const cardHTML = `
             <article class="site-card">
-                <a href="${site.url}" target="_blank" rel="noopener noreferrer" class="display-image-link" ${displayLinkStyle}></a>
+                <a href="${site.url}" class="display-image-link" ${displayLinkStyle}></a>
                 <div class="card-content">
-                    <h3><a href="${site.url}" target="_blank" rel="noopener noreferrer">${site.title}</a></h3>
+                    <h3><a href="${site.url}">${site.title}</a></h3>
                     <p class="description">${site.description || ""}</p>
                     ${exampleImagesHTML}
                 </div>
