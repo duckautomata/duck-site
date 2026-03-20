@@ -40,7 +40,7 @@ export default defineConfig({
                         res.end(fs.readFileSync(is404 ? "dist/404.html" : filePath, "utf-8"));
                     });
                 };
-            }
+            },
         },
     ],
 });
