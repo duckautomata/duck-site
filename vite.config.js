@@ -4,6 +4,9 @@ import path from "path";
 
 export default defineConfig({
     appType: "mpa",
+    test: {
+        environment: "jsdom",
+    },
     plugins: [
         {
             name: "static-404",
