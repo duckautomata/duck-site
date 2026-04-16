@@ -8,3 +8,10 @@ not_found_handling = "404-page"
 [[routes]]
 pattern = "www.duck-automata.com"
 custom_domain = true
+
+[env.dev]
+name = "duck-automata-landing-dev"
+
+[[env.dev.routes]]
+pattern = "dev.duck-automata.com"
+custom_domain = true
