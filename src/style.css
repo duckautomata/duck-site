@@ -345,3 +345,57 @@ body.error-page {
     background-color: #3182ce;
     transform: translateY(-2px);
 }
+
+/* ==========================================================================
+   5. Environment Badge Styles
+   ========================================================================== */
+.environment-badge {
+    position: fixed;
+    top: 26px;
+    left: 20px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    z-index: 10000;
+    pointer-events: none;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Local Environment */
+.environment-local {
+    background: rgba(236, 178, 46, 0.8); /* Golden/Amber */
+    color: #1a202c;
+    border-color: rgba(236, 178, 46, 0.3);
+}
+
+/* Dev Environment */
+.environment-dev {
+    background: rgba(49, 130, 206, 0.8); /* Blue */
+    color: #ffffff;
+    border-color: rgba(49, 130, 206, 0.3);
+}
+
+/* Staging Environment */
+.environment-staging {
+    background: rgba(128, 90, 213, 0.8); /* Purple */
+    color: #ffffff;
+    border-color: rgba(128, 90, 213, 0.3);
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] .environment-badge {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .environment-local {
+    background: rgba(236, 178, 46, 0.6);
+    color: #ffffff;
+}

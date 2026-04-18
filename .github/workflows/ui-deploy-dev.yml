@@ -45,8 +45,9 @@ jobs:
 
             - name: Build Static Files
               env:
-                  VITE_UI_TITLE: "Duck Automata Dev Websites"
                   VITE_PAGE_TITLE: "Duck Site Dev"
+                  VITE_SUB_DOMAIN: "dev"
+                  VITE_ENVIRONMENT: "dev"
               run: npm run build
 
             - name: Deploy to Cloudflare (Dev)
