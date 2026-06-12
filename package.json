@@ -15,10 +15,10 @@
     "devDependencies": {
         "@testing-library/dom": "^10.4.1",
         "jsdom": "^29.1.1",
-        "oxfmt": "^0.52.0",
-        "vite": "^8.0.14",
+        "oxfmt": "^0.53.0",
+        "vite": "^8.0.16",
         "vite-plugin-singlefile": "^2.3.3",
-        "vitest": "^4.1.7",
-        "wrangler": "^4.95.0"
+        "vitest": "^4.1.8",
+        "wrangler": "^4.98.0"
     }
 }
