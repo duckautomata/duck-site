@@ -3,6 +3,20 @@
 // The url must end with a /
 export const sites = [
     {
+        title: "Dokimosaic",
+        url: "./dokimosaic/",
+        description: "Turn any image into a mosaic built from Doki's emotes.",
+        displayImageLight: "Ntytn7DG7zG3ePYohffhBW",
+        displayImageDark: "Ntytn7DG7zG3ePYohffhBW",
+        exampleImages: [
+            { light: "zZn7Rkkm53vpB9V4fQvjyJ", dark: "zZn7Rkkm53vpB9V4fQvjyJ" },
+            { light: "DiPK3MWzVLAZrqFsfXPUZe", dark: "DiPK3MWzVLAZrqFsfXPUZe" },
+            { light: "q2CW2SpnVfkuPrfLvobrzN", dark: "q2CW2SpnVfkuPrfLvobrzN" },
+            { light: "NNMAWDrj6LqJ3e9VfXs2EM", dark: "NNMAWDrj6LqJ3e9VfXs2EM" },
+            { light: "yxpyS2fYnyCRfgaHL5BV6j", dark: "yxpyS2fYnyCRfgaHL5BV6j" },
+        ],
+    },
+    {
         title: "The Dokinomicon",
         url: "./dokinomicon/",
         description: "An archive of every Doki in the Dokiverse.",
@@ -14,15 +28,6 @@ export const sites = [
         ],
     },
     {
-        title: "Archived-Transcripts",
-        url: "./archived-transcript/",
-        description:
-            "Search and view transcripts of a livestream! Use the site to: Search for where something was said. Graph word usage over time. And more.",
-        displayImageLight: "94yC3QcbgBNGDq9His5UdL",
-        displayImageDark: "Niid83Gy2PBo7MT7XmeA2n",
-        exampleImages: [{ light: "rW6cbqPnmkA6NUENGoxogb", dark: "37Tn8tdb6f7Z9XLLGXzYUT" }],
-    },
-    {
         title: "Dokimotes",
         url: "./dokimotes/",
         description: "An archive of Dokibird's emotes to search through and use.",
@@ -32,6 +37,15 @@ export const sites = [
             { light: "tmwvXEnoFkwXmUemTRrMs6", dark: "DEGAdS5Svdevbahfsj5xiR" },
             { light: "uufagTaGUDrA7bZpByQKBB", dark: "mBDjeiWzHEQxqLtv6xaTHb" },
         ],
+    },
+    {
+        title: "Archived-Transcripts",
+        url: "./archived-transcript/",
+        description:
+            "Search and view transcripts of a livestream! Use the site to: Search for where something was said. Graph word usage over time. And more.",
+        displayImageLight: "94yC3QcbgBNGDq9His5UdL",
+        displayImageDark: "Niid83Gy2PBo7MT7XmeA2n",
+        exampleImages: [{ light: "rW6cbqPnmkA6NUENGoxogb", dark: "37Tn8tdb6f7Z9XLLGXzYUT" }],
     },
     {
         title: "Live-Transcripts",
