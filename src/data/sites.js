@@ -3,6 +3,17 @@
 // The url must end with a /
 export const sites = [
     {
+        title: "Doki's World Tour",
+        url: "./doki-world-tour/",
+        description: "An interactive world map displaying all the events Doki has been to over the years.",
+        displayImageLight: "Zdm9mg8zjQaFT2XiahgzjX",
+        displayImageDark: "9Shcv9XC3fVHztGbSoRxdb",
+        exampleImages: [
+            { light: "PtvHyDs6RWQ8NxGLLHGSm9", dark: "Aqwap4AW7LxQs7HDVCAHjE" },
+            { light: "6Myatgi68wZcDG8H769KbA", dark: "zkiLWmq4PWKKGs6jUgAzHB" },
+        ],
+    },
+    {
         title: "Dokimosaic",
         url: "./dokimosaic/",
         description: "Turn any image into a mosaic built from Doki's emotes.",
