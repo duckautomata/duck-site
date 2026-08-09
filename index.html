@@ -49,21 +49,56 @@
     </head>
 
     <body>
-        <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="theme-toggle" title="Toggle theme">
-                <input type="checkbox" id="theme-toggle" />
-                <span class="slider"></span>
-            </label>
-        </div>
+        <header class="hero">
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle" title="Toggle theme">
+                    <input type="checkbox" id="theme-toggle" />
+                    <span class="slider"></span>
+                </label>
+            </div>
 
-        <h1>Duck Automata Websites</h1>
-        <p class="hub-description">A central hub for all the websites I made for my fellow Dragoons.</p>
+            <h1>Duck Automata Websites</h1>
+            <p class="hub-description">A central hub for all the websites I made for my fellow Dragoons.</p>
+        </header>
+
+        <div class="toolbar">
+            <div class="toolbar-inner">
+                <div class="search-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="11" cy="11" r="7" />
+                        <line x1="16.5" y1="16.5" x2="21" y2="21" />
+                    </svg>
+                    <input
+                        type="search"
+                        id="site-search"
+                        class="search-input"
+                        placeholder="Search sites…"
+                        aria-label="Search sites"
+                        autocomplete="off"
+                    />
+                    <button type="button" id="search-clear" class="search-clear" aria-label="Clear search" hidden>
+                        &times;
+                    </button>
+                    <kbd class="search-hint" title="Press / to jump to search">/</kbd>
+                </div>
+
+                <div class="toolbar-row">
+                    <div id="tag-filters" class="tag-filters" role="group" aria-label="Filter sites"></div>
+                    <span id="result-count" class="result-count"></span>
+                </div>
+            </div>
+        </div>
 
         <main id="site-grid"></main>
 
         <div id="lightbox-modal" class="lightbox">
-            <span class="lightbox-close">&times;</span>
-            <img class="lightbox-content" id="lightbox-img" />
+            <span class="lightbox-close" role="button" aria-label="Close">&times;</span>
+            <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous example" hidden>
+                &#8249;
+            </button>
+            <img class="lightbox-content" id="lightbox-img" alt="Example screenshot" />
+            <button type="button" class="lightbox-nav lightbox-next" aria-label="Next example" hidden>&#8250;</button>
+            <span id="lightbox-counter" class="lightbox-counter" hidden></span>
         </div>
 
         <script type="module" src="/src/main.js"></script>

@@ -5,31 +5,49 @@
     /* Light Theme (Default) */
     --bg-color: #f0f2f5;
     --card-bg-color: #ffffff;
+    --surface-subtle: #e9edf3;
+    --surface-hover: #dde3ec;
     --text-primary: #1a202c;
     --text-secondary: #4a5568;
     --text-tertiary: #718096;
-    --border-color: #edf2f7;
+    --border-color: #e2e8f0;
+    --border-strong: #cbd5e0;
     --accent-color: #4299e1;
+    --accent-strong: #3182ce;
+    --accent-soft: rgba(66, 153, 225, 0.12);
+    --star-color: #e8a317;
     --shadow-color: rgba(0, 0, 0, 0.08);
     --shadow-hover-color: rgba(0, 0, 0, 0.12);
+    --toolbar-bg: rgba(240, 242, 245, 0.82);
     --lightbox-bg: rgba(0, 0, 0, 0.9);
     --lightbox-close: #f1f1f1;
     --toggle-bg: #cbd5e0;
     --toggle-fg: #ffffff;
     --toggle-icon: #f6e05e; /* Sun */
+
+    --radius-lg: 14px;
+    --radius-md: 10px;
+    --radius-pill: 999px;
 }
 
 [data-theme="dark"] {
     /* Dark Theme */
     --bg-color: #1a202c;
     --card-bg-color: #2d3748;
+    --surface-subtle: #384357;
+    --surface-hover: #46536b;
     --text-primary: #edf2f7;
     --text-secondary: #a0aec0;
     --text-tertiary: #718096;
-    --border-color: #4a5568;
+    --border-color: #3f4a5f;
+    --border-strong: #4a5568;
     --accent-color: #4299e1;
+    --accent-strong: #63b3ed;
+    --accent-soft: rgba(66, 153, 225, 0.2);
+    --star-color: #f6c453;
     --shadow-color: rgba(0, 0, 0, 0.2);
     --shadow-hover-color: rgba(0, 0, 0, 0.3);
+    --toolbar-bg: rgba(26, 32, 44, 0.82);
     --toggle-bg: #4a5568;
     --toggle-fg: #1a202c;
     --toggle-icon: #76e4f7; /* Moon */
@@ -42,11 +60,15 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-color);
     margin: 0;
-    padding: 20px;
+    padding: 0 20px 60px;
     color: var(--text-secondary);
     transition:
         background-color 0.3s ease,
         color 0.3s ease;
+}
+
+body.lightbox-open {
+    overflow: hidden;
 }
 
 h1 {
@@ -55,18 +77,25 @@ h1 {
     margin-bottom: 10px;
 }
 
+:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
 /* ==========================================================================
-   3. Homepage Specific Styles
+   3. Hero
    ========================================================================== */
+.hero {
+    padding: 20px 0 8px;
+}
+
 .hub-description {
     text-align: center;
     font-size: 1.15rem;
     color: var(--text-secondary);
-    margin-top: 0;
-    margin-bottom: 40px;
+    margin: 0 auto;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* Theme Toggle Switch */
@@ -135,53 +164,418 @@ input:checked + .slider:before {
     color: var(--toggle-icon);
 }
 
-/* Site Grid Layout */
+.theme-switch input:focus-visible + .slider {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   4. Toolbar (search + filters)
+   ========================================================================== */
+.toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin: 24px -20px 28px;
+    padding: 12px 20px;
+    background-color: var(--toolbar-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.toolbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: var(--text-tertiary);
+    stroke-width: 2;
+    stroke-linecap: round;
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 76px 11px 42px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-pill);
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* The native clear affordance duplicates our own button. */
+.search-input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.search-clear {
+    position: absolute;
+    right: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--text-secondary);
+    background-color: var(--surface-subtle);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.search-clear:hover {
+    background-color: var(--surface-hover);
+}
+
+.search-hint {
+    position: absolute;
+    right: 14px;
+    padding: 2px 8px;
+    font-family: inherit;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    background-color: var(--surface-subtle);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+.toolbar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.tag-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-chip {
+    padding: 6px 14px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.filter-chip:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+}
+
+.filter-chip.is-active {
+    color: #ffffff;
+    background-color: var(--accent-strong);
+    border-color: var(--accent-strong);
+}
+
+[data-theme="dark"] .filter-chip.is-active {
+    color: #1a202c;
+}
+
+.result-count {
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+}
+
+/* ==========================================================================
+   5. Site Grid
+   ========================================================================== */
 #site-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+.grid-section + .grid-section {
+    margin-top: 36px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 16px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+.grid-section.starred-section .section-heading {
+    color: var(--star-color);
+}
+
+.section-count {
+    padding: 1px 9px;
+    font-size: 0.75rem;
+    letter-spacing: 0;
+    color: var(--text-secondary);
+    background-color: var(--surface-subtle);
+    border-radius: var(--radius-pill);
+}
+
+.section-heading::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--border-color);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 22px;
+}
+
 /* Site Card Styles */
 .site-card {
+    position: relative;
     background-color: var(--card-bg-color);
-    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
     box-shadow: 0 4px 12px var(--shadow-color);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
+        border-color 0.2s ease,
         background-color 0.3s ease;
-    display: flex;
-    flex-direction: column;
 }
 
 .site-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 16px var(--shadow-hover-color);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px var(--shadow-hover-color);
+}
+
+.card-media {
+    position: relative;
 }
 
 .site-card .display-image-link {
     display: block;
-    height: 200px;
-    background-color: var(--border-color);
+    aspect-ratio: 16 / 10;
+    background-color: var(--surface-subtle);
     background-image: var(--light-image);
     background-size: cover;
     background-position: center;
 }
 
+/* Card Action Buttons (collapse toggle + star) */
+.card-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.card-actions.on-media {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.card-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    color: var(--text-tertiary);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.card-action svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    transition: transform 0.2s ease;
+}
+
+.card-action:hover {
+    color: var(--text-primary);
+    background-color: var(--surface-subtle);
+    transform: scale(1.08);
+}
+
+/* Over a screenshot the buttons need their own contrast. */
+.on-media .card-action {
+    color: #ffffff;
+    background-color: rgba(15, 20, 30, 0.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.on-media .card-action:hover {
+    color: #ffffff;
+    background-color: rgba(15, 20, 30, 0.7);
+}
+
+/* The chevron points down to expand and flips once the card is open. */
+.card-toggle[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+}
+
+.star-button.is-starred,
+.on-media .star-button.is-starred {
+    color: var(--star-color);
+}
+
+.star-button.is-starred svg {
+    fill: currentColor;
+    animation: star-pop 0.25s ease;
+}
+
+@keyframes star-pop {
+    0% {
+        transform: scale(0.6);
+    }
+    60% {
+        transform: scale(1.25);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Compact Card
+   Sits at the top of its grid track instead of stretching to match the tallest
+   card in the row, so a collapsed card stays collapsed next to an expanded one. */
+.site-card.is-compact {
+    align-self: start;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px 10px 10px;
+}
+
+.site-card.is-compact:hover {
+    transform: none;
+    border-color: var(--border-strong);
+}
+
+.compact-thumb {
+    flex-shrink: 0;
+    width: 54px;
+    height: 54px;
+    border-radius: 8px;
+    background-color: var(--surface-subtle);
+    background-image: var(--light-image);
+    background-size: cover;
+    background-position: center;
+}
+
+.compact-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.compact-text h3 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.compact-text h3 a {
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: color 0.2s ease;
+}
+
+.compact-text h3 a:hover {
+    color: var(--accent-color);
+}
+
+.compact-description {
+    margin: 2px 0 0;
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+[data-theme="dark"] .compact-thumb {
+    background-image: var(--dark-image);
+}
+
+/* Card Content */
 .card-content {
-    padding: 20px;
+    padding: 16px 18px 18px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
 .card-content h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.4rem;
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+    line-height: 1.3;
 }
 
 .card-content h3 a {
@@ -194,20 +588,51 @@ input:checked + .slider:before {
     color: var(--accent-color);
 }
 
-.card-content .description {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-    flex-grow: 1;
-    margin-bottom: 16px;
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
 }
 
-.card-content .examples-label {
-    font-size: 0.8rem;
+.tag {
+    padding: 2px 9px;
+    font-size: 0.72rem;
     font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background-color: var(--surface-subtle);
+    border-radius: var(--radius-pill);
+}
+
+.card-content .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0 0 16px;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    flex-grow: 1;
+}
+
+.card-examples {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-color);
+}
+
+.examples-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     color: var(--text-tertiary);
     text-transform: uppercase;
-    margin-bottom: 8px;
 }
 
 .example-images {
@@ -217,21 +642,53 @@ input:checked + .slider:before {
 }
 
 .example-thumb {
-    width: 60px;
-    height: 60px;
-    border-radius: 6px;
-    border: 2px solid var(--border-color);
+    width: 54px;
+    height: 54px;
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
     cursor: pointer;
-    transition:
-        opacity 0.2s ease,
-        border-color 0.3s ease;
+    background-color: var(--surface-subtle);
     background-image: var(--light-image);
     background-size: cover;
     background-position: center;
+    transition:
+        transform 0.15s ease,
+        border-color 0.2s ease;
 }
 
 .example-thumb:hover {
-    opacity: 0.8;
+    transform: scale(1.06);
+    border-color: var(--accent-color);
+}
+
+.example-more {
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    background-image: none;
+}
+
+/* Empty State */
+.empty-state {
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--text-secondary);
+    background-color: var(--card-bg-color);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-lg);
+}
+
+.empty-state .empty-title {
+    margin: 0 0 6px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.empty-state p {
+    margin: 0;
 }
 
 [data-theme="dark"] .display-image-link,
@@ -239,7 +696,13 @@ input:checked + .slider:before {
     background-image: var(--dark-image);
 }
 
-/* Lightbox Modal Styles */
+[data-theme="dark"] .example-more {
+    background-image: none;
+}
+
+/* ==========================================================================
+   6. Lightbox Modal
+   ========================================================================== */
 .lightbox {
     display: none;
     position: fixed;
@@ -263,6 +726,7 @@ input:checked + .slider:before {
     max-height: 90vh;
     width: auto;
     height: auto;
+    border-radius: 6px;
 }
 
 .lightbox-close {
@@ -272,6 +736,7 @@ input:checked + .slider:before {
     color: var(--lightbox-close);
     font-size: 40px;
     font-weight: bold;
+    line-height: 1;
     transition: 0.3s;
     cursor: pointer;
 }
@@ -283,8 +748,138 @@ input:checked + .slider:before {
     cursor: pointer;
 }
 
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    padding: 0 0 4px;
+    font-size: 32px;
+    line-height: 1;
+    color: var(--lightbox-close);
+    background-color: rgba(255, 255, 255, 0.12);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.lightbox-nav:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+.lightbox-counter {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 14px;
+    font-size: 0.85rem;
+    color: var(--lightbox-close);
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-pill);
+}
+
 /* ==========================================================================
-   4. 404 Page Specific Styles
+   7. Responsive
+   ========================================================================== */
+@media (max-width: 640px) {
+    /* Leave the top strip to the theme toggle and the environment badge. */
+    .hero {
+        padding-top: 58px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .hub-description {
+        font-size: 1rem;
+    }
+
+    .toolbar {
+        margin-top: 18px;
+    }
+
+    .search-hint {
+        display: none;
+    }
+
+    .search-input {
+        padding-right: 44px;
+    }
+
+    .search-clear {
+        right: 14px;
+    }
+
+    .toolbar-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* Keep the chips on one swipeable line instead of stacking rows. */
+    .tag-filters {
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+    }
+
+    .tag-filters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .lightbox-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 26px;
+    }
+
+    .lightbox-prev {
+        left: 8px;
+    }
+
+    .lightbox-next {
+        right: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .site-card:hover {
+        transform: none;
+    }
+}
+
+/* ==========================================================================
+   8. 404 Page Specific Styles
    ========================================================================== */
 
 /* Add class="error-page" to your 404.html body tag to center this properly */
@@ -293,6 +888,7 @@ body.error-page {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    padding: 20px;
     box-sizing: border-box;
 }
 
@@ -347,7 +943,7 @@ body.error-page {
 }
 
 /* ==========================================================================
-   5. Environment Badge Styles
+   9. Environment Badge Styles
    ========================================================================== */
 .environment-badge {
     position: fixed;

@@ -1,11 +1,14 @@
 // The images use the id of the image in the cdn under the /home/ prefix.
 // It'll grab both the thumbnail and preview versions.
 // The url must end with a /
+// The id must be unique and stable, it is what starred sites are saved under.
 export const sites = [
     {
+        id: "doki-world-tour",
         title: "Doki's World Tour",
         url: "./doki-world-tour/",
         description: "An interactive world map displaying all the events Doki has been to over the years.",
+        tags: ["Archives"],
         displayImageLight: "Zdm9mg8zjQaFT2XiahgzjX",
         displayImageDark: "9Shcv9XC3fVHztGbSoRxdb",
         exampleImages: [
@@ -14,9 +17,11 @@ export const sites = [
         ],
     },
     {
+        id: "dokimosaic",
         title: "Dokimosaic",
         url: "./dokimosaic/",
         description: "Turn any image into a mosaic built from Doki's emotes.",
+        tags: ["Tools"],
         displayImageLight: "Ntytn7DG7zG3ePYohffhBW",
         displayImageDark: "Ntytn7DG7zG3ePYohffhBW",
         exampleImages: [
@@ -28,9 +33,11 @@ export const sites = [
         ],
     },
     {
+        id: "dokinomicon",
         title: "The Dokinomicon",
         url: "./dokinomicon/",
         description: "An archive of every Doki in the Dokiverse.",
+        tags: ["Archives"],
         displayImageLight: "utPT3mQsKXBhDi4nDfVX9B",
         displayImageDark: "g9BsSYYSYa6kACPfT9ZHia",
         exampleImages: [
@@ -39,9 +46,11 @@ export const sites = [
         ],
     },
     {
+        id: "dokimotes",
         title: "Dokimotes",
         url: "./dokimotes/",
         description: "An archive of Dokibird's emotes to search through and use.",
+        tags: ["Archives"],
         displayImageLight: "fPRM8zF2LG7uhtwtZCxRSe",
         displayImageDark: "bnSaEMpYeyQR6BZeGLh8YD",
         exampleImages: [
@@ -50,27 +59,33 @@ export const sites = [
         ],
     },
     {
+        id: "archived-transcript",
         title: "Archived-Transcripts",
         url: "./archived-transcript/",
         description:
             "Search and view transcripts of a livestream! Use the site to: Search for where something was said. Graph word usage over time. And more.",
+        tags: ["Transcripts"],
         displayImageLight: "94yC3QcbgBNGDq9His5UdL",
         displayImageDark: "Niid83Gy2PBo7MT7XmeA2n",
         exampleImages: [{ light: "rW6cbqPnmkA6NUENGoxogb", dark: "37Tn8tdb6f7Z9XLLGXzYUT" }],
     },
     {
+        id: "live-transcript",
         title: "Live-Transcripts",
         url: "./live-transcript/",
         description:
             "View the transcript of an active or previously active livestream in near real-time! Use the site to: View what was said in the event you missed it or didn't hear it correctly. Playback and download audio segments for each transcribed line. Graph word usage over time. And much more.",
+        tags: ["Transcripts"],
         displayImageLight: "z7YXnyTQ4HG7G5AhFMAYx",
         displayImageDark: "AD2mpJpWL3exBsGupJ8Pvf",
         exampleImages: [{ light: "w4ugzXr33wayL2yvwfMkRD", dark: "hxokjQWnFdbCWEmkbTXADZ" }],
     },
     {
+        id: "dokisnake",
         title: "Dokisnake",
         url: "./dokisnake/",
         description: "It's snake. But with Dokibird's long neck trying to feed DAD some chicken.",
+        tags: ["Games"],
         displayImageLight: "xeFQmBAEPUoTMCUeE63Wg9",
         displayImageDark: "xeFQmBAEPUoTMCUeE63Wg9",
         exampleImages: [
