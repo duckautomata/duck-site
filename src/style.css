@@ -16,6 +16,10 @@
     --accent-strong: #3182ce;
     --accent-soft: rgba(66, 153, 225, 0.12);
     --star-color: #e8a317;
+    --doki-color: #8b5cf6;
+    --doki-soft: rgba(139, 92, 246, 0.16);
+    --mint-color: #10b981;
+    --mint-soft: rgba(16, 185, 129, 0.14);
     --shadow-color: rgba(0, 0, 0, 0.08);
     --shadow-hover-color: rgba(0, 0, 0, 0.12);
     --toolbar-bg: rgba(240, 242, 245, 0.82);
@@ -45,6 +49,10 @@
     --accent-strong: #63b3ed;
     --accent-soft: rgba(66, 153, 225, 0.2);
     --star-color: #f6c453;
+    --doki-color: #8b5cf6;
+    --doki-soft: rgba(139, 92, 246, 0.26);
+    --mint-color: #10b981;
+    --mint-soft: rgba(16, 185, 129, 0.3);
     --shadow-color: rgba(0, 0, 0, 0.2);
     --shadow-hover-color: rgba(0, 0, 0, 0.3);
     --toolbar-bg: rgba(26, 32, 44, 0.82);
@@ -551,6 +559,28 @@ input:checked + .slider:before {
     color: var(--accent-color);
 }
 
+.streamer-dots {
+    display: inline-flex;
+    gap: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.streamer-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.streamer-dot-doki {
+    color: var(--doki-color);
+}
+
+.streamer-dot-mint {
+    color: var(--mint-color);
+}
+
 .compact-description {
     margin: 2px 0 0;
     font-size: 0.82rem;
@@ -604,6 +634,22 @@ input:checked + .slider:before {
     color: var(--text-secondary);
     background-color: var(--surface-subtle);
     border-radius: var(--radius-pill);
+}
+
+/* Who the site is for. Colored so "Doki", "Mint" or both reads at a glance,
+   with the label still spelled out for anyone who can't tell them apart. */
+.tag-streamer {
+    border: 1px solid currentColor;
+}
+
+.tag-doki {
+    color: var(--doki-color);
+    background-color: var(--doki-soft);
+}
+
+.tag-mint {
+    color: var(--mint-color);
+    background-color: var(--mint-soft);
 }
 
 .card-content .description {

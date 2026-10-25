@@ -1,7 +1,7 @@
 {
     "name": "Duck Site (Dev)",
     "short_name": "DevDuckSite",
-    "description": "A central hub for all Dragoon dev websites made by Duck Automata.",
+    "description": "A central hub for all Dragoon and Aiboo dev websites made by Duck Automata.",
     "start_url": "/",
     "scope": "/",
     "icons": [

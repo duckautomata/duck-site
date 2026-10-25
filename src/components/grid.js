@@ -11,6 +11,8 @@ const MAX_VISIBLE_THUMBS = 4;
 const STAR_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.1l2.72 5.51 6.08.89-4.4 4.29 1.04 6.05L12 16.98l-5.44 2.86 1.04-6.05-4.4-4.29 6.08-.89z" stroke-linejoin="round"/></svg>`;
 const CHEVRON_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9.5l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
+const STREAMER_LABELS = { doki: "Doki", mint: "Mint" };
+
 // "all" | "starred" | a tag name
 const state = { query: "", filter: "all" };
 
@@ -44,10 +46,50 @@ export function getAllTags() {
     return [...tags].sort((a, b) => a.localeCompare(b));
 }
 
+/**
+ * @param {object} site A site from the data file.
+ * @returns {string[]} Display names for the streamers the site covers.
+ */
+function streamerLabels(site) {
+    return (site.streamers || []).map((streamer) => STREAMER_LABELS[streamer]).filter(Boolean);
+}
+
+/**
+ * Colored chips naming who the site is for. They sit ahead of the regular tags
+ * so a card answers "Doki, Mint, or both?" before anything else.
+ */
+function streamerTagsHTML(site) {
+    return (site.streamers || [])
+        .filter((streamer) => STREAMER_LABELS[streamer])
+        .map(
+            (streamer) =>
+                `<span class="tag tag-streamer tag-${escapeHtml(streamer)}">${escapeHtml(STREAMER_LABELS[streamer])}</span>`,
+        )
+        .join("");
+}
+
+/**
+ * The compact card has no room for chips, so the same information becomes a
+ * colored dot per streamer in front of the title.
+ */
+function streamerDotsHTML(site) {
+    const dots = (site.streamers || [])
+        .filter((streamer) => STREAMER_LABELS[streamer])
+        .map((streamer) => {
+            const label = escapeHtml(STREAMER_LABELS[streamer]);
+            return `<span class="streamer-dot streamer-dot-${escapeHtml(streamer)}" role="img" title="${label}" aria-label="${label}"></span>`;
+        })
+        .join("");
+
+    return dots ? `<span class="streamer-dots">${dots}</span>` : "";
+}
+
 function matchesQuery(site, query) {
     if (!query) return true;
 
-    const haystack = [site.title, site.description, ...(site.tags || [])].join(" ").toLowerCase();
+    const haystack = [site.title, site.description, ...(site.tags || []), ...streamerLabels(site)]
+        .join(" ")
+        .toLowerCase();
     // Every word has to appear somewhere, so "live graph" finds Live-Transcripts.
     return query
         .toLowerCase()
@@ -137,7 +179,7 @@ function compactCardHTML(site) {
         <article class="site-card is-compact" data-site-id="${escapeHtml(site.id)}">
             <a href="${escapeHtml(site.url)}" class="compact-thumb" style="${escapeHtml(imageStyle(site, "_t"))}" aria-hidden="true" tabindex="-1"></a>
             <div class="compact-text">
-                <h3><a href="${escapeHtml(site.url)}">${escapeHtml(site.title)}</a></h3>
+                <h3>${streamerDotsHTML(site)}<a href="${escapeHtml(site.url)}">${escapeHtml(site.title)}</a></h3>
                 <p class="compact-description" title="${description}">${description}</p>
             </div>
             ${cardActionsHTML(site, true)}
@@ -146,7 +188,8 @@ function compactCardHTML(site) {
 }
 
 function fullCardHTML(site) {
-    const tags = (site.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
+    const tags =
+        streamerTagsHTML(site) + (site.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
     const description = escapeHtml(site.description || "");
 
     return `

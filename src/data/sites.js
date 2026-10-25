@@ -2,6 +2,7 @@
 // It'll grab both the thumbnail and preview versions.
 // The url must end with a /
 // The id must be unique and stable, it is what starred sites are saved under.
+// streamers lists who the site covers: "doki", "mint", or both.
 export const sites = [
     {
         id: "doki-world-tour",
@@ -9,6 +10,7 @@ export const sites = [
         url: "./doki-world-tour/",
         description: "An interactive world map displaying all the events Doki has been to over the years.",
         tags: ["Archives"],
+        streamers: ["doki"],
         displayImageLight: "Zdm9mg8zjQaFT2XiahgzjX",
         displayImageDark: "9Shcv9XC3fVHztGbSoRxdb",
         exampleImages: [
@@ -20,8 +22,9 @@ export const sites = [
         id: "dokimosaic",
         title: "Dokimosaic",
         url: "./dokimosaic/",
-        description: "Turn any image into a mosaic built from Doki's emotes.",
+        description: "Turn any image into a mosaic built from Doki's and/or Mint's emotes.",
         tags: ["Tools"],
+        streamers: ["doki", "mint"],
         displayImageLight: "Ntytn7DG7zG3ePYohffhBW",
         displayImageDark: "Ntytn7DG7zG3ePYohffhBW",
         exampleImages: [
@@ -33,11 +36,26 @@ export const sites = [
         ],
     },
     {
+        id: "mintonomicon",
+        title: "The Mintonomicon",
+        url: "./mintonomicon/",
+        description: "An archive of every Mint in the Mintoverse.",
+        tags: ["Archives"],
+        streamers: ["mint"],
+        displayImageLight: "tFJEBKtWtTVB5qJPT8Zwze",
+        displayImageDark: "4vZCCyFqiwaVM2t96zaBFg",
+        exampleImages: [
+            { light: "Cmv5aEgWFxnpsH5CFW6X78", dark: "cvcqkFZ9nWURVUsuBFcgse" },
+            { light: "acpQXJDBh5eguoaYJps4p", dark: "qveaQkw6rtF6GFCAKmmb9C" },
+        ],
+    },
+    {
         id: "dokinomicon",
         title: "The Dokinomicon",
         url: "./dokinomicon/",
         description: "An archive of every Doki in the Dokiverse.",
         tags: ["Archives"],
+        streamers: ["doki"],
         displayImageLight: "utPT3mQsKXBhDi4nDfVX9B",
         displayImageDark: "g9BsSYYSYa6kACPfT9ZHia",
         exampleImages: [
@@ -46,16 +64,31 @@ export const sites = [
         ],
     },
     {
+        id: "mintomotes",
+        title: "Mintomotes",
+        url: "./mintomotes/",
+        description: "An archive of Mint Fantome's emotes to search through and use.",
+        tags: ["Archives"],
+        streamers: ["mint"],
+        displayImageLight: "C2KzNbHykCXwXdqVn5soGB",
+        displayImageDark: "h2FbHC9FZpFSkLSxaScWD8",
+        exampleImages: [
+            { light: "pgcmFgfxSaeaywAtqEHsQf", dark: "eb4ZcXTNHM8hse3hE6PZU" },
+            { light: "kaTxg3cqgsu53LjPcEodVK", dark: "7NiqmU8k7PbX27DrSM2WtL" },
+        ],
+    },
+    {
         id: "dokimotes",
         title: "Dokimotes",
         url: "./dokimotes/",
         description: "An archive of Dokibird's emotes to search through and use.",
         tags: ["Archives"],
+        streamers: ["doki"],
         displayImageLight: "fPRM8zF2LG7uhtwtZCxRSe",
         displayImageDark: "bnSaEMpYeyQR6BZeGLh8YD",
         exampleImages: [
-            { light: "tmwvXEnoFkwXmUemTRrMs6", dark: "DEGAdS5Svdevbahfsj5xiR" },
-            { light: "uufagTaGUDrA7bZpByQKBB", dark: "mBDjeiWzHEQxqLtv6xaTHb" },
+            { light: "5Tq9EEpHkgZM6R4JAKvhVk", dark: "9stLAkzjD2XmeywJFtX4Hn" },
+            { light: "5fk2KMffTbAyythr8Wsb2d", dark: "D7q2XxA6ZRLhs5eFdKuBSf" },
         ],
     },
     {
@@ -65,6 +98,7 @@ export const sites = [
         description:
             "Search and view transcripts of a livestream! Use the site to: Search for where something was said. Graph word usage over time. And more.",
         tags: ["Transcripts"],
+        streamers: ["doki", "mint"],
         displayImageLight: "94yC3QcbgBNGDq9His5UdL",
         displayImageDark: "Niid83Gy2PBo7MT7XmeA2n",
         exampleImages: [{ light: "rW6cbqPnmkA6NUENGoxogb", dark: "37Tn8tdb6f7Z9XLLGXzYUT" }],
@@ -76,6 +110,7 @@ export const sites = [
         description:
             "View the transcript of an active or previously active livestream in near real-time! Use the site to: View what was said in the event you missed it or didn't hear it correctly. Playback and download audio segments for each transcribed line. Graph word usage over time. And much more.",
         tags: ["Transcripts"],
+        streamers: ["doki", "mint"],
         displayImageLight: "z7YXnyTQ4HG7G5AhFMAYx",
         displayImageDark: "AD2mpJpWL3exBsGupJ8Pvf",
         exampleImages: [{ light: "w4ugzXr33wayL2yvwfMkRD", dark: "hxokjQWnFdbCWEmkbTXADZ" }],
@@ -86,6 +121,7 @@ export const sites = [
         url: "./dokisnake/",
         description: "It's snake. But with Dokibird's long neck trying to feed DAD some chicken.",
         tags: ["Games"],
+        streamers: ["doki"],
         displayImageLight: "xeFQmBAEPUoTMCUeE63Wg9",
         displayImageDark: "xeFQmBAEPUoTMCUeE63Wg9",
         exampleImages: [

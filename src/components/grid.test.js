@@ -10,6 +10,7 @@ vi.mock("../data/sites.js", () => ({
             url: "./test/",
             description: "A test site description.",
             tags: ["Archives"],
+            streamers: ["doki"],
             displayImageLight: "test_light_img",
             displayImageDark: "test_dark_img",
             exampleImages: [{ light: "ex_light_1", dark: "ex_dark_1" }],
@@ -20,6 +21,7 @@ vi.mock("../data/sites.js", () => ({
             url: "./other/",
             description: "Something completely different.",
             tags: ["Games"],
+            streamers: ["doki", "mint"],
             displayImageLight: "other_light_img",
             displayImageDark: "other_dark_img",
             exampleImages: [
@@ -96,6 +98,22 @@ describe("grid", () => {
         expect(otherCard.querySelector(".example-more").textContent).toBe("+2");
     });
 
+    it("leads the tag list with a colored chip per streamer", () => {
+        renderGrid();
+
+        const tags = [...document.querySelectorAll('.site-card[data-site-id="other-site"] .tag')];
+        expect(tags.map((tag) => tag.textContent)).toEqual(["Doki", "Mint", "Games"]);
+        expect(tags[0].className).toBe("tag tag-streamer tag-doki");
+        expect(tags[1].className).toBe("tag tag-streamer tag-mint");
+    });
+
+    it("shows a single streamer chip for a single-streamer site", () => {
+        renderGrid();
+
+        const tags = [...document.querySelectorAll('.site-card[data-site-id="test-site"] .tag')];
+        expect(tags.map((tag) => tag.textContent)).toEqual(["Doki", "Archives"]);
+    });
+
     it("collects the tags used across every site", () => {
         expect(getAllTags()).toEqual(["Archives", "Games"]);
     });
@@ -127,6 +145,16 @@ describe("grid", () => {
             expect(card.querySelector(".description")).toBeNull();
             expect(card.querySelector(".compact-thumb")).not.toBeNull();
             expect(card.querySelector(".card-toggle").getAttribute("aria-expanded")).toBe("false");
+        });
+
+        it("shows streamers as colored dots on the compact card", () => {
+            star("other-site");
+            renderGrid();
+
+            const dots = [...document.querySelectorAll('.site-card[data-site-id="other-site"] .streamer-dot')];
+            expect(dots.map((dot) => dot.getAttribute("aria-label"))).toEqual(["Doki", "Mint"]);
+            expect(dots[0].classList.contains("streamer-dot-doki")).toBe(true);
+            expect(dots[1].classList.contains("streamer-dot-mint")).toBe(true);
         });
 
         it("uses the thumbnail image for the compact card", () => {
@@ -280,6 +308,18 @@ describe("grid", () => {
             expect(cards).toHaveLength(1);
             expect(cards[0].dataset.siteId).toBe("other-site");
             expect(document.getElementById("result-count").textContent).toBe("1 of 2 sites");
+        });
+
+        it("searches by streamer name", () => {
+            initGrid();
+            const input = document.getElementById("site-search");
+
+            input.value = "mint";
+            input.dispatchEvent(new Event("input"));
+
+            const cards = document.querySelectorAll(".site-card");
+            expect(cards).toHaveLength(1);
+            expect(cards[0].dataset.siteId).toBe("other-site");
         });
 
         it("matches every search word independently", () => {
