@@ -5,6 +5,17 @@
 // streamers lists who the site covers: "doki", "mint", or both.
 export const sites = [
     {
+        id: "doki-time",
+        title: "Doki Time",
+        url: "./doki-time/",
+        description: "A simple site used to help convert Doki Time to GMT and JST, as well as your local time.",
+        tags: ["Tools"],
+        streamers: ["doki"],
+        displayImageLight: "RZpYo4oQRJb8mfVDo5dNJG",
+        displayImageDark: "uVEnhXEThwu8PLkg4xgesU",
+        exampleImages: [],
+    },
+    {
         id: "doki-world-tour",
         title: "Doki's World Tour",
         url: "./doki-world-tour/",
