@@ -19,6 +19,6 @@
         "vite": "^8.3.4",
         "vite-plugin-singlefile": "^2.3.4",
         "vitest": "^5.0.5",
-        "wrangler": "^4.151.1"
+        "wrangler": "^4.156.2"
     }
 }
